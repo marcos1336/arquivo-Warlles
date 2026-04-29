@@ -1,0 +1,168 @@
+def mensagem_sucesso(texto):
+    print(f"\n✔ {texto}\n")
+
+
+def formatar_cpf(cpf):
+    cpf = cpf.replace(".", "").replace("-", "").strip()
+
+    if len(cpf) == 11 and cpf.isdigit():
+        return f"{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}"
+    
+    return cpf
+
+
+def formatar_telefone(tel):
+    tel = tel.replace(" ", "").strip()
+
+    if len(tel) == 11 and tel.isdigit():
+        return f"({tel[:2]}) {tel[2:7]}-{tel[7:]}"
+    
+    return tel
+
+
+def criar_cliente(id, nome, cpf, telefone, cidade):
+    return {
+        "id": id,
+        "nome": nome,
+        "cpf": cpf,
+        "telefone": telefone,
+        "cidade": cidade
+    }
+
+
+def adicionar_cliente(lista_clientes):
+    print("\n=== NOVO CLIENTE ===")
+
+    id = len(lista_clientes) + 1
+    nome = input("Nome: ")
+    cpf = formatar_cpf(input("CPF: "))
+    telefone = formatar_telefone(input("Telefone: "))
+    cidade = input("Cidade: ")
+
+    lista_clientes.append(criar_cliente(id, nome, cpf, telefone, cidade))
+
+    mensagem_sucesso(f"Cliente {nome} adicionado com sucesso!")
+
+
+def excluir_cliente_por_id(lista_clientes):
+    print("\n=== EXCLUIR CLIENTE ===")
+
+    try:
+        id_busca = int(input("Digite o ID do cliente: "))
+    except ValueError:
+        print("ID inválido!")
+        return
+
+    for i, c in enumerate(lista_clientes):
+        if c["id"] == id_busca:
+            nome = c["nome"]
+            del lista_clientes[i]
+
+            # reorganiza IDs
+            for idx, cliente in enumerate(lista_clientes):
+                cliente["id"] = idx + 1
+
+            mensagem_sucesso(f"Cliente {nome} removido com sucesso!")
+            return
+
+    print("Cliente não encontrado!")
+
+
+def mostrar_clientes(lista_clientes):
+    print("\n╔══════════════════════════════════════════════════════════════════════════════════════╗")
+    print("║                                TABELA DE CLIENTES                                   ║")
+    print("╠════╦════════════════════╦═════════════════╦══════════════╦══════════════════════════╣")
+    print("║ ID ║ NOME               ║ CPF             ║ TELEFONE     ║ CIDADE                  ║")
+    print("╠════╬════════════════════╬═════════════════╬══════════════╬══════════════════════════╣")
+
+    for c in lista_clientes:
+        print(f"║ {c['id']:<2} ║ {c['nome']:<18} ║ {c['cpf']:<15} ║ {c['telefone']:<12} ║ {c['cidade']:<24} ║")
+
+    print("╚════╩════════════════════╩═════════════════╩══════════════╩══════════════════════════╝\n")
+
+
+def buscar_cliente_por_id(lista_clientes):
+    print("\n=== BUSCAR CLIENTE POR ID ===")
+
+    try:
+        id_busca = int(input("Digite o ID: "))
+    except ValueError:
+        print("ID inválido!")
+        return
+
+    for c in lista_clientes:
+        if c["id"] == id_busca:
+            print("\nCliente encontrado:")
+            print("╔════╦════════════════════╦═════════════════╦══════════════╦══════════════════════════╗")
+            print("║ ID ║ NOME               ║ CPF             ║ TELEFONE     ║ CIDADE                  ║")
+            print("╠════╬════════════════════╬═════════════════╬══════════════╬══════════════════════════╣")
+            print(f"║ {c['id']:<2} ║ {c['nome']:<18} ║ {c['cpf']:<15} ║ {c['telefone']:<12} ║ {c['cidade']:<24} ║")
+            print("╚════╩════════════════════╩═════════════════╩══════════════╩══════════════════════════╝\n")
+            return
+
+    print("Cliente não encontrado!")
+
+
+def salvar_clientes(lista_clientes):
+    with open("cliente.txt", "w") as arquivo:
+        arquivo.write("╔══════════════════════════════════════════════════════════════════════════════════════╗\n")
+        arquivo.write("║                                TABELA DE CLIENTES                                   ║\n")
+        arquivo.write("╠════╦════════════════════╦═════════════════╦══════════════╦══════════════════════════╣\n")
+        arquivo.write("║ ID ║ NOME               ║ CPF             ║ TELEFONE     ║ CIDADE                  ║\n")
+        arquivo.write("╠════╬════════════════════╬═════════════════╬══════════════╬══════════════════════════╣\n")
+
+        for c in lista_clientes:
+            linha = f"║ {c['id']:<2} ║ {c['nome']:<18} ║ {c['cpf']:<15} ║ {c['telefone']:<12} ║ {c['cidade']:<24} ║\n"
+            arquivo.write(linha)
+
+        arquivo.write("╚════╩════════════════════╩═════════════════╩══════════════╩══════════════════════════╝\n")
+
+    mensagem_sucesso("Arquivo salvo com sucesso!")
+
+
+clientes = [
+    criar_cliente(1, "Joao Silva", "123.456.789-00", "(86) 99999-0001", "Teresina"),
+    criar_cliente(2, "Maria Souza", "987.654.321-00", "(86) 99999-0002", "Timon"),
+    criar_cliente(3, "Carlos Lima", "111.222.333-44", "(86) 99999-0003", "Parnaiba"),
+    criar_cliente(4, "Ana Paula", "555.666.777-88", "(86) 99999-0004", "Picos"),
+    criar_cliente(5, "Bruno Alves", "999.888.777-66", "(86) 99999-0005", "Floriano"),
+    criar_cliente(6, "Juliana Rocha", "444.333.222-11", "(86) 99999-0006", "Teresina"),
+    criar_cliente(7, "Rafael Mendes", "222.333.444-55", "(86) 99999-0007", "Altos"),
+    criar_cliente(8, "Patricia Gomes", "666.555.444-33", "(86) 99999-0008", "Uniao"),
+    criar_cliente(9, "Fernando Costa", "777.888.999-00", "(86) 99999-0009", "Barras"),
+    criar_cliente(10, "Larissa Nunes", "101.202.303-40", "(86) 99999-0010", "Piripiri"),
+]
+
+mostrar_clientes(clientes)
+
+while True:
+    print("\n1 - Adicionar cliente")
+    print("2 - Mostrar clientes")
+    print("3 - Salvar")
+    print("4 - Buscar por ID")
+    print("5 - Excluir cliente")
+    print("6 - Sair")
+
+    op = input("Escolha: ")
+
+    if op == "1":
+        adicionar_cliente(clientes)
+
+    elif op == "2":
+        mostrar_clientes(clientes)
+
+    elif op == "3":
+        salvar_clientes(clientes)
+
+    elif op == "4":
+        buscar_cliente_por_id(clientes)
+
+    elif op == "5":
+        excluir_cliente_por_id(clientes)
+
+    elif op == "6":
+        mensagem_sucesso("Sistema encerrado")
+        break
+
+    else:
+        print("Opção inválida")
