@@ -1,0 +1,20 @@
+1|PIX|3500|05/05/2026|Fornecedor|NF1001|Mariana Costa
+2|Cartão|1250|05/05/2026|Materiais|NF1002|Ricardo Souza
+3|Boleto|5700|06/05/2026|Estoque|NF1003|Mariana Costa
+4|PIX|950|06/05/2026|Energia|NF1004|Felipe Lima
+5|Dinheiro|400|06/05/2026|Interno|NF1005|Ana Paula
+6|Cartão|1100|07/05/2026|Equipamento|NF1006|Ricardo Souza
+7|PIX|6300|07/05/2026|Estoque|NF1007|Mariana Costa
+8|Boleto|780|07/05/2026|Água|NF1008|Felipe Lima
+9|PIX|2450|08/05/2026|Marketing|NF1009|Ana Paula
+10|Cartão|900|08/05/2026|Limpeza|NF1010|Ricardo Souza
+11|PIX|1700|08/05/2026|Transporte|NF1011|Mariana Costa
+12|Boleto|2300|09/05/2026|Aluguel|NF1012|Felipe Lima
+13|Dinheiro|320|09/05/2026|Café|NF1013|Ana Paula
+14|PIX|4100|09/05/2026|Produtos|NF1014|Ricardo Souza
+15|Cartão|2050|10/05/2026|Equip. TI|NF1015|Mariana Costa
+16|Boleto|5900|10/05/2026|Fornecedor|NF1016|Felipe Lima
+17|PIX|870|10/05/2026|Escritório|NF1017|Ana Paula
+18|Cartão|1430|11/05/2026|Publicidade|NF1018|Ricardo Souza
+19|Dinheiro|260|11/05/2026|Manutenção|NF1019|Mariana Costa
+20|PIX|7200|11/05/2026|Eletrônicos|NF1020|Felipe Lima
